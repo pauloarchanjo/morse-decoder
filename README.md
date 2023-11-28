@@ -1,2 +1,2 @@
 # Morse-Code-Encryptor_py
-Encriptador e decriptador de código morse feito em Python.
+Morse code encryptor and decryptor made in Python.
