@@ -1,4 +1,6 @@
-# Morse Code Encryptor and Decryptor in Python
+# MorseDecoder
+
+![Screenshot](banner.png)
 
 A simple and efficient Morse code encryptor and decryptor implemented in Python.
 
