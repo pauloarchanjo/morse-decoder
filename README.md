@@ -18,12 +18,12 @@ This project provides a tool to convert text to Morse code and Morse code back t
 ## Installation
 Clone the repository to your local machine:
 ```sh
-git clone https://github.com/yourusername/morse-code-encryptor-python.git
+git clone https://github.com/pauloarchanjo/morse-decoder.git
 ```
 
 Navigate to the project directory:
 ```sh
-cd morse-code-encryptor-python
+cd morse-decoder
 ```
 
 ## Run
