@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 MORSE_CODE_DICT = {
     'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
     'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
@@ -41,31 +44,54 @@ class MorseCodeTranslator:
                     morse_characters = []
         return "".join(normal_text)
 
-class MorseCodeApp:
-    def __init__(self):
+class MorseCodeAppGUI:
+    def __init__(self, root):
+        self.root = root
         self.translator = MorseCodeTranslator(MORSE_CODE_DICT)
-    
-    def run(self):
-        while True:
-            print("====================================================================")
-            print("\n\t\t   <<< MORSE CODE ENCRYPTOR >>>\n")
-            print("====================================================================")
-            print("Choose your option: \n")
-            choice = input("(E) - Encrypt \n\n(D) - Decrypt  \n\n(S) - Exit Program\n").upper()
-            if choice == 'E':
-                text_to_encrypt = input("\nEnter text to be encrypted: ").upper()
-                encrypted_text = self.translator.encrypt(text_to_encrypt)
-                print("Encrypted text: ", encrypted_text)
-            elif choice == 'D':
-                text_to_decrypt = input("\nEnter text to be decrypted: ")
-                decrypted_text = self.translator.decrypt(text_to_decrypt)
-                print("Decrypted text: ", decrypted_text)
-            elif choice == 'S':
-                print("\n Shutdown...")
-                break
-            else:
-                print("\nInvalid option. Try again.")
+        self.root.title("MorseDecoder")
+        self.root.iconbitmap("icon/LOGO.ico")
+
+        # Create frames
+        self.frame = tk.Frame(self.root)
+        self.frame.pack(padx=10, pady=10)
+
+        # Input and output text areas
+        self.input_label = tk.Label(self.frame, text="Input text:")
+        self.input_label.grid(row=0, column=0, sticky=tk.W)
+        self.input_text = tk.Text(self.frame, height=5, width=50)
+        self.input_text.grid(row=1, column=0, columnspan=2, pady=5)
+
+        self.output_label = tk.Label(self.frame, text="Output Text:")
+        self.output_label.grid(row=2, column=0, sticky=tk.W)
+        self.output_text = tk.Text(self.frame, height=5, width=50)
+        self.output_text.grid(row=3, column=0, columnspan=2, pady=5)
+
+        # Buttons
+        self.encrypt_button = tk.Button(self.frame, text="Encrypt", command=self.encrypt_text)
+        self.encrypt_button.grid(row=4, column=0, pady=5)
+
+        self.decrypt_button = tk.Button(self.frame, text="Decrypt", command=self.decrypt_text)
+        self.decrypt_button.grid(row=4, column=1, pady=5)
+
+    def encrypt_text(self):
+        input_text = self.input_text.get("1.0", tk.END).strip().upper()
+        if input_text:
+            encrypted_text = self.translator.encrypt(input_text)
+            self.output_text.delete("1.0", tk.END)
+            self.output_text.insert(tk.END, encrypted_text)
+        else:
+            messagebox.showerror("Input Error", "Please enter text to encrypt.")
+
+    def decrypt_text(self):
+        input_text = self.input_text.get("1.0", tk.END).strip()
+        if input_text:
+            decrypted_text = self.translator.decrypt(input_text)
+            self.output_text.delete("1.0", tk.END)
+            self.output_text.insert(tk.END, decrypted_text)
+        else:
+            messagebox.showerror("Input Error", "Please enter Morse code to decrypt.")
 
 if __name__ == "__main__":
-    app = MorseCodeApp()
-    app.run()
+    root = tk.Tk()
+    app = MorseCodeAppGUI(root)
+    root.mainloop()
