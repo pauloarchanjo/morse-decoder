@@ -14,6 +14,7 @@ This project provides a tool to convert text to Morse code and Morse code back t
 
 ## Requirements
 - Python 3.x
+- Tkinter Library
 
 ## Installation
 Clone the repository to your local machine:
